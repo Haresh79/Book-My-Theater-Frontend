@@ -1,0 +1,169 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900&display=swap');
+
+@theme {
+  --drop-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+  --drop-shadow-purple: 0 0 15px rgba(147, 51, 234, 0.4);
+  --animate-gradient: gradient 60s infinite;
+  --font-lato: "Lato", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  @keyframes gradient {
+    0% { right: 5vw; }
+    25% { right: 20vw; }
+    50% { left: 5vw; top: 20%; }
+    75% { left: 20vw; }
+    100% { right: 5vw; }
+  }
+}
+
+:root {
+  --background: #090d16;
+  --foreground: #f1f5f9;
+  --card-bg: rgba(15, 23, 42, 0.75);
+  --accent-purple: #8b5cf6;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', 'Nunito', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-header {
+  background: rgba(9, 13, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.3);
+}
+
+/* Seat Selection animations */
+@keyframes seatPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.22); }
+  100% { transform: scale(1.08); }
+}
+
+.seat-item {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.seat-item:hover:not(.seat-taken) {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
+}
+
+.seat-selected {
+  animation: seatPop 0.25s forwards;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%) !important;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.8) !important;
+}
+
+.seat-taken {
+  cursor: not-allowed;
+  opacity: 0.45;
+  background-color: #334155 !important;
+}
+
+/* Curved Theater Screen Visual */
+.screen-visual {
+  height: 14px;
+  width: 80%;
+  max-width: 480px;
+  background: linear-gradient(90deg, transparent, #8b5cf6, #ec4899, #8b5cf6, transparent);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow: 0 -8px 25px rgba(139, 92, 246, 0.6);
+  margin: 0 auto;
+}
+
+/* Custom ticket cutouts */
+.ticket-container {
+  position: relative;
+  background: linear-gradient(145deg, #1e1b4b 0%, #0f172a 100%);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.ticket-notch-left,
+.ticket-notch-right {
+  width: 20px;
+  height: 20px;
+  background-color: #090d16;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.ticket-notch-left {
+  left: -10px;
+}
+
+.ticket-notch-right {
+  right: -10px;
+}
+
+/* Bouncing Loader */
+.bouncing-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+.bouncing-loader div {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  animation: bouncing-loader 0.6s infinite alternate;
+}
+.bouncing-loader div:nth-child(2) { animation-delay: 0.2s; }
+.bouncing-loader div:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bouncing-loader {
+  to {
+    opacity: 0.2;
+    transform: translateY(-8px);
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8b5cf6;
+}
